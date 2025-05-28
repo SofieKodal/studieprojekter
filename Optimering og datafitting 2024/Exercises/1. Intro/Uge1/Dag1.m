@@ -1,0 +1,42 @@
+%%%%%%% Dag 1
+
+%%%%%% Opgave 1
+f = @(x)(x-log(x));
+x = 0:0.01:2;
+plot(x,f(x))
+
+df = @(x)(1-1./x);
+ddf = @(x)(1./(x.^2));
+
+subplot(3,1,1)
+plot(x,f(x),'b');
+subplot(3,1,2)
+plot(x,df(x),'r');
+subplot(3,1,3)
+plot(x,ddf(x),'g');
+% Det kan ses på første plot at f(x) er convex
+
+% Find minimumsværdi
+syms x
+eqn = 1-1./x == 0;
+X_min = solve(eqn,x);
+
+%Contour plot af gradient
+x1=-9:0.005:5;
+x2=x1;
+[X,Y]=meshgrid(x1,x2);
+F=8*X + 12*Y + X.^2 -2*Y.^2;
+
+figure(1),
+mesh(X,Y,F), grid minor,
+xlabel('x_1','fontsize',14),
+ylabel('x_2','fontsize',14),
+zlabel('f (x)','fontsize',14),
+figure(2),
+v=[0:2:10 10:5:100 100:20:200];
+[c,h]=contour(X,Y,F,v,'linewidth',2),
+colorbar, axis image,
+xlabel('x_1','fontsize',14),
+ylabel('x_2','fontsize',14),
+
+
